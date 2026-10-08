@@ -55,11 +55,11 @@ networks.
 
 ### Ответ на Задание 2
 ```
-version: '3.8'
-services: {}
-volumes: {}
+version: '3'
+services: 
+volumes: 
 networks:
-  LugininaV-my-netology-hw:
+  karpenkosn-my-netology-hw:
     driver: bridge
     ipam:
       config:
