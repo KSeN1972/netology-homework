@@ -54,16 +54,16 @@ networks.
 При выполнении задания используйте подсеть 10.5.0.0/16. Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw. Все приложения из последующих заданий должны находиться в этой конфигурации.
 
 ### Ответ на Задание 2
-version: '3'
-services: 
-volumes: 
+
+version: '3.8'
+services: {}
+volumes: {}
 networks:
-  karpenkosn-my-netology-hw:
+  LugininaV-my-netology-hw:
     driver: bridge
     ipam:
       config:
         - subnet: 10.5.0.0/16
-
 ### Задание 3
 
 `Приведите ответ в свободной форме........`
