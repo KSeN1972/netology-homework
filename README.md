@@ -91,7 +91,7 @@ networks:
 
 ```
 
-`![Google] (https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png)`
+`![Google] (./screenshots/scr01.png)`
 
 ### Задание 4
 
