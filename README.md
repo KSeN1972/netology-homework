@@ -116,3 +116,4 @@ networks:
 ![Название скриншота](ссылка на скриншот)`
 ![](screenshots/scr01.png)
 [] https://docs.google.com/document/d/1A50DUAiFAbUHqSn3C280bguanJAwND27sRlONOD00fc/edit?tab=t.0
+
