@@ -91,7 +91,7 @@ networks:
 
 ```
 
-`![Google] (./screenshots/scr01.png?raw=true)`
+![Google] (./screenshots/scr01.png?raw=true)
 
 ### Задание 4
 
