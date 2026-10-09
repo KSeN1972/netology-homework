@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: karpenkosn-netology-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - karpenkosn-my-netology-hw
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: karpenkosn-netology-pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - karpenkosn-my-netology-hw
+volumes:
+  prometheus-data:
+networks:
+  karpenkosn-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16

@@ -56,6 +56,7 @@ networks.
 ### Ответ на Задание 2
 ```
 version: '3'
+# В актуальном Docker Compose поле version: в корне YAML-файла больше не нужно и считается устаревшим
 services: 
 volumes: 
 networks:
@@ -68,21 +69,54 @@ networks:
 
 ### Задание 3
 
-`Приведите ответ в свободной форме........`
+**Выполните действия:**
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+1. Создайте конфигурацию docker-compose для Prometheus с именем контейнера <ваши фамилия и инициалы>-netology-prometheus.
+2. Добавьте необходимые тома с данными и конфигурацией (конфигурация лежит в репозитории в директории [6-04/prometheus](https://github.com/netology-code/sdvps-homeworks/tree/main/lecture_demos/6-04/prometheus) ).
+3. Обеспечьте внешний доступ к порту 9090 c докер-сервера.
+
+### Ответ на Задание 3
+
+Создал конфигурацию docker-compose для Prometheus с именем контейнера karpenkosn-netology-prometheus.
+Добавил тома для данных (prometheus-data) и конфигурации (prometheus.yml)
+Обеспечил внешний доступ к порту 9090.
+
+```
+global:
+  scrape_interval: 15s
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'pushgateway'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['pushgateway:9091']
+
+
+```
+![ Prometheus](screenshots/prom.png)
+
 
 ```
 version: '3.8'
-services: {}
-volumes: {}
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: karpenkosn-netology-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - karpenkosn-my-netology-hw
+volumes:
+  prometheus-data:
 networks:
-  LugininaV-my-netology-hw:
+  karpenkosn-my-netology-hw:
     driver: bridge
     ipam:
       config:
@@ -90,8 +124,59 @@ networks:
 
 
 ```
+### Задание 4
+Выполните действия:
+
+Создайте конфигурацию docker-compose для Pushgateway с именем контейнера <ваши фамилия и инициалы>-netology-pushgateway.
+Обеспечьте внешний доступ к порту 9091 c докер-сервера.
+
+### Ответ на Задание 4
+
+```
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: karpenkosn-netology-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - karpenkosn-my-netology-hw
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: karpenkosn-netology-pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - karpenkosn-my-netology-hw
+volumes:
+  prometheus-data:
+networks:
+  karpenkosn-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+```
+### Задание 5
+Выполните действия:
+
+Создайте конфигурацию docker-compose для Grafana с именем контейнера <ваши фамилия и инициалы>-netology-grafana.
+Добавьте необходимые тома с данными и конфигурацией (конфигурация лежит в репозитории в директории 6-04/grafana.
+Добавьте переменную окружения с путем до файла с кастомными настройками (должен быть в томе), в самом файле пропишите логин=<ваши фамилия и инициалы> пароль=netology.
+Обеспечьте внешний доступ к порту 3000 c порта 80 докер-сервера.
+
+### Ответ на Задание 5
+
+
 
 ![Google] (./screenshots/scr01.png?raw=true)
+
+
 
 ### Задание 4
 
