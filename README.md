@@ -92,7 +92,7 @@ networks:
 ```
 
 `Скриншот 01
-![Скриншот 01]https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png`
+![Ueuk] (https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png)`
 
 ### Задание 4
 
