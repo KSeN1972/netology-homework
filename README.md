@@ -91,8 +91,7 @@ networks:
 
 ```
 
-`Скриншот 01
-![Ueuk] (https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png)`
+`![Google] (https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png)`
 
 ### Задание 4
 
