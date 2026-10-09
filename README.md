@@ -114,5 +114,5 @@ networks:
 
 `При необходимости прикрепитe сюда скриншоты
 ![Название скриншота](ссылка на скриншот)`
-![crhby](screenshots/scr01.png)
-[ter] https://docs.google.com/document/d/1A50DUAiFAbUHqSn3C280bguanJAwND27sRlONOD00fc/edit?tab=t.0
+![](screenshots/scr01.png)
+[] https://docs.google.com/document/d/1A50DUAiFAbUHqSn3C280bguanJAwND27sRlONOD00fc/edit?tab=t.0
