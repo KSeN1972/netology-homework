@@ -78,15 +78,21 @@ networks:
 6. 
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+version: '3.8'
+services: {}
+volumes: {}
+networks:
+  LugininaV-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+`Скриншот 01
+![Скриншот 01]https://github.com/KSeN1972/netology-homework/blob/main/screenshots/scr01.png`
 
 ### Задание 4
 
