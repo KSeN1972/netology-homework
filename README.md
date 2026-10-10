@@ -266,6 +266,15 @@ docker-compose.yml целиком;
 
 ### Ответ на задание 7
 
+Сделал запрос
+
+![Запрос](screenshots/qwery.png)
+
+
+ В Grafana вошел с логином karpenkosn и паролем netology.
+ 
+Создал Data Source Prometheus с URL http://prometheus:9090. Построен график на основе метрики karpenkosn
+
 ```
 version: '3.8'
 services:
@@ -315,7 +324,25 @@ networks:
       config:
         - subnet: 10.5.0.0/16
 ```
-![start] (screenshots/start.png)
+![start](screenshots/start.png)
+
+![grafana](screenshots/grafana.png)
+
+### Задание 8
+Выполните действия:
+
+Остановите и удалите все контейнеры одной командой.
+В качестве решения приложите скриншот консоли с проделанными действиями.
+### Ответ на Задание 8
+```
+docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+```
+![grafana](screenshots/stop.png)
+
+
+
+
+
 
 
 
