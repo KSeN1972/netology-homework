@@ -171,5 +171,59 @@ networks:
 Обеспечьте внешний доступ к порту 3000 c порта 80 докер-сервера.
 
 ### Ответ на Задание 5
+Создал конфигурацию docker-compose для Grafana с именем контейнера karpenkosn-netology-grafana. Добавлены тома для данных (grafana-data) и конфигурации (custom.ini), настроена переменная окружения для пути к конфигурации. В custom.ini указаны логин karpenkosn и пароль netology. Обеспечен внешний доступ к порту 3000 через порт 80.
 
 
+```
+[security]
+admin_user = karpenkosn
+admin_password = netology
+
+```
+```
+
+
+
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: karpenkosn-netology-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - karpenkosn-my-netology-hw
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: karpenkosn-netology-pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - karpenkosn-my-netology-hw
+  grafana:
+    image: grafana/grafana:latest
+    container_name: karpenkosn-netology-grafana
+    ports:
+      - "80:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
+    networks:
+      - karpenkosn-my-netology-hw
+volumes:
+  prometheus-data:
+  grafana-data:
+networks:
+  karpenkosn-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+
+```
