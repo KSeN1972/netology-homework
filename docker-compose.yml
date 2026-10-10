@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: karpenkosn-netology-pushgateway
+    ports:
+      - "9091:9091"
+    restart: always
+    networks:
+      - karpenkosn-my-netology-hw
   prometheus:
     image: prom/prometheus:latest
     container_name: karpenkosn-netology-prometheus
@@ -8,17 +16,29 @@ services:
     volumes:
       - prometheus-data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: always
+    depends_on:
+      - pushgateway
     networks:
       - karpenkosn-my-netology-hw
-  pushgateway:
-    image: prom/pushgateway:latest
-    container_name: karpenkosn-netology-pushgateway
+  grafana:
+    image: grafana/grafana:latest
+    container_name: karpenkosn-netology-grafana
     ports:
-      - "9091:9091"
+      - "80:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
+    restart: always
+    depends_on:
+      - prometheus
     networks:
       - karpenkosn-my-netology-hw
 volumes:
   prometheus-data:
+  grafana-data:
 networks:
   karpenkosn-my-netology-hw:
     driver: bridge

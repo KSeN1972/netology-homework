@@ -227,3 +227,75 @@ networks:
 
 
 ```
+
+### Задание 6
+
+**Выполните действия.**
+
+1. Настройте поочередность запуска контейнеров.
+2. Настройте режимы перезапуска для контейнеров.
+3. Настройте использование контейнерами одной сети.
+5. Запустите сценарий в detached режиме.
+
+### Ответ на задание 6
+
+Настроил поочередность запуска контейнеров: Pushgateway → Prometheus → Grafana.
+Добавил режимы перезапуска always для всех контейнеров.
+restart: always. Это значит, что контейнер сервиса будет автоматически перезапускаться системой даже если он завершился с ошибкой.
+depends_on: - pushgateway. Эта опция указывает, что сервис должен запускаться только после того, как успешно запустится контейнер pushgateway ,
+ну и по аналогии используется опция depends_on:- prometheus
+
+все контейнеры используют сеть karpenko-my-netology-hw.
+
+Сценарий запущен в detached-режиме с помощью команды docker compose up -d
+
+```
+version: '3.8'
+services:
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: karpenkosn-netology-pushgateway
+    ports:
+      - "9091:9091"
+    restart: always
+    networks:
+      - karpenkosn-my-netology-hw
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: karpenkosn-netology-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: always
+    depends_on:
+      - pushgateway
+    networks:
+      - karpenkosn-my-netology-hw
+  grafana:
+    image: grafana/grafana:latest
+    container_name: karpenkosn-netology-grafana
+    ports:
+      - "80:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
+    restart: always
+    depends_on:
+      - prometheus
+    networks:
+      - karpenkosn-my-netology-hw
+volumes:
+  prometheus-data:
+  grafana-data:
+networks:
+  karpenkosn-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+```
+
