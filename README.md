@@ -55,7 +55,7 @@ networks.
 
 ### Ответ на Задание 2
 ```
-version: '3'
+version: '3.8'
 # В актуальном Docker Compose поле version: в корне YAML-файла больше не нужно и считается устаревшим
 services: 
 volumes: 
